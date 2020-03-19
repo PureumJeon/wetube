@@ -18,16 +18,16 @@ const handleVideoData = event => {
 const stopRecording = () => {
   videoRecorder.stop();
   recordBtn.removeEventListener("click", stopRecording);
-  recordBtn.innerHTML = "Start recording";
   recordBtn.addEventListener("click", getVideo);
+  recordBtn.innerHTML = "Start recording";
   console.log("녹화끝");
 };
 
 const startRecording = () => {
   videoRecorder = new MediaRecorder(streamObject);
   videoRecorder.start();
-  recordBtn.addEventListener("click", stopRecording);
   videoRecorder.addEventListener("dataavailable", handleVideoData);
+  recordBtn.addEventListener("click", stopRecording);
   console.log("녹화중");
 };
 
