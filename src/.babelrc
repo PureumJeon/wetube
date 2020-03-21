@@ -3,8 +3,13 @@
     [
       "@babel/preset-env",
       {
-        "useBuiltIns": "entry"
+        "useBuiltIns": "usage",
+        "corejs": 2
       }
-    ]
-  ]
+    ],
+    "@babel/preset-react",
+    "minify"
+  ],
+  "ignore": ["src/assets/"],
+  "plugins": ["@babel/plugin-transform-runtime"]
 }

@@ -15,7 +15,8 @@ const config = {
         test: /\.(js)$/,
         use: [
           {
-            loader: "babel-loader"
+            loader: "babel-loader",
+            options: { compact: false }
           }
         ]
       },
@@ -27,6 +28,7 @@ const config = {
           },
           {
             loader: "postcss-loader",
+
             options: {
               plugins() {
                 return [autoprefixer({ browsers: "cover 99.5%" })];
