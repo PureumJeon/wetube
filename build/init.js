@@ -1,5 +1,9 @@
 "use strict";
 
+require("core-js/stable");
+
+require("regenerator-runtime/runtime");
+
 require("./db");
 
 var _app = _interopRequireDefault(require("./app"));
