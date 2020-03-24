@@ -1,1 +1,27 @@
-"use strict";var _interopRequireDefault=require("@babel/runtime/helpers/interopRequireDefault"),_mongoose=_interopRequireDefault(require("mongoose")),_dotenv=_interopRequireDefault(require("dotenv"));_dotenv["default"].config(),_mongoose["default"].connect(process.env.MONGO_URL,{useNewUrlParser:!0,useFindAndModify:!1});var db=_mongoose["default"].connection,handleOpen=function(){return console.log("\u2714 Connected to DB")},handleError=function(a){return console.log("\u274C Error on DB Connection :".concat(a))};db.once("open",handleOpen),db.on("error",handleError);
+"use strict";
+
+var _mongoose = _interopRequireDefault(require("mongoose"));
+
+var _dotenv = _interopRequireDefault(require("dotenv"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+_dotenv["default"].config();
+
+_mongoose["default"].connect(process.env.PRODUCTION ? process.env.MONGO_URL_PROD : process.env.MONGO_URL, {
+  useNewUrlParser: true,
+  useFindAndModify: false
+});
+
+var db = _mongoose["default"].connection;
+
+var handleOpen = function handleOpen() {
+  return console.log("✔ Connected to DB");
+};
+
+var handleError = function handleError(error) {
+  return console.log("\u274C Error on DB Connection :".concat(error));
+};
+
+db.once("open", handleOpen);
+db.on("error", handleError);

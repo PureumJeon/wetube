@@ -1,1 +1,69 @@
-"use strict";var _interopRequireDefault=require("@babel/runtime/helpers/interopRequireDefault");require("core-js/modules/es6.object.define-property"),Object.defineProperty(exports,"__esModule",{value:!0}),exports.onlyPrivate=exports.onlyPublic=exports.localsMiddleware=exports.uploadAvatar=exports.uploadVideo=void 0;var _multer=_interopRequireDefault(require("multer")),_multerS=_interopRequireDefault(require("multer-s3")),_awsSdk=_interopRequireDefault(require("aws-sdk")),_routes=_interopRequireDefault(require("./routes")),s3=new _awsSdk["default"].S3({accessKeyId:process.env.AWS_KEY,secretAccessKey:process.env.AWS_PRIVATE_KEY,region:"ap-northeast-2"}),multerVideo=(0,_multer["default"])({storage:(0,_multerS["default"])({s3:s3,acl:"public-read",bucket:"we-tube-clone/video"})}),multerAvatar=(0,_multer["default"])({storage:(0,_multerS["default"])({s3:s3,acl:"public-read",bucket:"we-tube-clone/avatar"})}),uploadVideo=multerVideo.single("videoFile");exports.uploadVideo=uploadVideo;var uploadAvatar=multerAvatar.single("avatar");exports.uploadAvatar=uploadAvatar;var localsMiddleware=function(a,b,c){b.locals.siteName="WeTube",b.locals.routes=_routes["default"],b.locals.loggedUser=a.user||null,c()};exports.localsMiddleware=localsMiddleware;var onlyPublic=function(a,b,c){a.user?b.redirect(_routes["default"].home):c()};exports.onlyPublic=onlyPublic;var onlyPrivate=function(a,b,c){a.user?b.redirect(_routes["default"].home):c()};exports.onlyPrivate=onlyPrivate;
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.onlyPrivate = exports.onlyPublic = exports.localsMiddleware = exports.uploadAvatar = exports.uploadVideo = void 0;
+
+var _multer = _interopRequireDefault(require("multer"));
+
+var _multerS = _interopRequireDefault(require("multer-s3"));
+
+var _awsSdk = _interopRequireDefault(require("aws-sdk"));
+
+var _routes = _interopRequireDefault(require("./routes"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+var s3 = new _awsSdk["default"].S3({
+  accessKeyId: process.env.AWS_KEY,
+  secretAccessKey: process.env.AWS_PRIVATE_KEY,
+  region: "ap-northeast-2"
+});
+var multerVideo = (0, _multer["default"])({
+  storage: (0, _multerS["default"])({
+    s3: s3,
+    acl: "public-read",
+    bucket: "we-tube-clone/video"
+  })
+});
+var multerAvatar = (0, _multer["default"])({
+  storage: (0, _multerS["default"])({
+    s3: s3,
+    acl: "public-read",
+    bucket: "we-tube-clone/avatar"
+  })
+});
+var uploadVideo = multerVideo.single("videoFile");
+exports.uploadVideo = uploadVideo;
+var uploadAvatar = multerAvatar.single("avatar");
+exports.uploadAvatar = uploadAvatar;
+
+var localsMiddleware = function localsMiddleware(req, res, next) {
+  res.locals.siteName = "WeTube";
+  res.locals.routes = _routes["default"];
+  res.locals.loggedUser = req.user || null;
+  next();
+};
+
+exports.localsMiddleware = localsMiddleware;
+
+var onlyPublic = function onlyPublic(req, res, next) {
+  if (req.user) {
+    res.redirect(_routes["default"].home);
+  } else {
+    next();
+  }
+};
+
+exports.onlyPublic = onlyPublic;
+
+var onlyPrivate = function onlyPrivate(req, res, next) {
+  if (req.user) {
+    res.redirect(_routes["default"].home);
+  } else {
+    next();
+  }
+};
+
+exports.onlyPrivate = onlyPrivate;

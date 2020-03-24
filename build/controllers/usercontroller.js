@@ -1,2 +1,418 @@
-"use strict";var _interopRequireDefault=require("@babel/runtime/helpers/interopRequireDefault");var _regenerator=_interopRequireDefault(require("@babel/runtime/regenerator"));require("core-js/modules/es6.object.define-property"),Object.defineProperty(exports,"__esModule",{value:!0}),exports.postChangePassword=exports.getChangePassword=exports.postEditProfile=exports.getEditProfile=exports.userDetail=exports.getMe=exports.logout=exports.postKakaoLogin=exports.kakaoLoginCallback=exports.kakaoLogin=exports.postGithubLogin=exports.githubLoginCallback=exports.githubLogin=exports.postLogin=exports.getLogin=exports.postJoin=exports.getJoin=void 0;require("core-js/modules/es6.function.name"),require("regenerator-runtime/runtime");var _asyncToGenerator2=_interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator")),_passport=_interopRequireDefault(require("passport")),_routes=_interopRequireDefault(require("../routes")),_User=_interopRequireDefault(require("../models/User")),getJoin=function(a,b){b.render("join",{pageTitle:"Join"})};exports.getJoin=getJoin;var postJoin=/*#__PURE__*/function(){var a=(0,_asyncToGenerator2["default"])(/*#__PURE__*/_regenerator["default"].mark(function a(b,c,d){var e,f,g,h,i,j;return _regenerator["default"].wrap(function(a){for(;;)switch(a.prev=a.next){case 0:if(e=b.body,f=e.name,g=e.email,h=e.password,i=e.password2,h===i){a.next=6;break}c.status(400),c.render("join",{pageTitle:"Join"}),a.next=19;break;case 6:return a.prev=6,a.next=9,(0,_User["default"])({name:f,email:g});case 9:return j=a.sent,a.next=12,_User["default"].register(j,h);case 12:d(),a.next=19;break;case 15:a.prev=15,a.t0=a["catch"](6),console.log(a.t0),c.redirect(_routes["default"].home);case 19:case"end":return a.stop();}},a,null,[[6,15]])}));return function(){return a.apply(this,arguments)}}();exports.postJoin=postJoin;var getLogin=function(a,b){return b.render("login",{pageTitle:"Login"})};exports.getLogin=getLogin;var postLogin=_passport["default"].authenticate("local",{failureRedirect:_routes["default"].login,successRedirect:_routes["default"].home});exports.postLogin=postLogin;var githubLogin=_passport["default"].authenticate("github");exports.githubLogin=githubLogin;var githubLoginCallback=/*#__PURE__*/function(){var a=(0,_asyncToGenerator2["default"])(/*#__PURE__*/_regenerator["default"].mark(function a(b,c,d,e){var f,g,h,i,j,k,l;return _regenerator["default"].wrap(function(a){for(;;)switch(a.prev=a.next){case 0:return f=d._json,g=f.id,h=f.avatar_url,i=f.name,j=f.email,console.log(d),a.prev=2,a.next=5,_User["default"].findOne({email:j});case 5:if(k=a.sent,!k){a.next=10;break}return k.githubId=g,k.save(),a.abrupt("return",e(null,k));case 10:return a.next=12,_User["default"].create({email:j,name:i,githubId:g,avatarUrl:h});case 12:return l=a.sent,a.abrupt("return",e(null,l));case 16:return a.prev=16,a.t0=a["catch"](2),a.abrupt("return",e(a.t0));case 19:case"end":return a.stop();}},a,null,[[2,16]])}));return function(){return a.apply(this,arguments)}}();exports.githubLoginCallback=githubLoginCallback;var postGithubLogin=function(a,b){b.redirect(_routes["default"].home)};//kakao
-exports.postGithubLogin=postGithubLogin;var kakaoLogin=_passport["default"].authenticate("kakao");exports.kakaoLogin=kakaoLogin;var kakaoLoginCallback=/*#__PURE__*/function(){var a=(0,_asyncToGenerator2["default"])(/*#__PURE__*/_regenerator["default"].mark(function a(b,c,d,e){var f,g,h,i,j,k,l,m,n;return _regenerator["default"].wrap(function(a){for(;;)switch(a.prev=a.next){case 0:return f=d._json,g=f.id,h=f.properties,i=f.kakao_account,j=h.nickname,k=h.profile_image,l=i.email,console.log(g,h.nickname,h.profile_image,i.email),a.prev=5,a.next=8,_User["default"].findOne({email:l});case 8:if(m=a.sent,!m){a.next=13;break}return m.kakaoId=g,m.save(),a.abrupt("return",e(null,m));case 13:return a.next=15,_User["default"].create({email:l,name:j,kakaoId:g,avatarUrl:k});case 15:return n=a.sent,a.abrupt("return",e(null,n));case 19:return a.prev=19,a.t0=a["catch"](5),a.abrupt("return",e(a.t0));case 22:case"end":return a.stop();}},a,null,[[5,19]])}));return function(){return a.apply(this,arguments)}}();exports.kakaoLoginCallback=kakaoLoginCallback;var postKakaoLogin=function(a,b){b.redirect(_routes["default"].home)};exports.postKakaoLogin=postKakaoLogin;var logout=function(a,b){a.logout(),b.redirect(_routes["default"].home),console.log("bye")};exports.logout=logout;var getMe=function(a,b){return b.render("userDetail",{pageTitle:"User Detail",user:a.user})};exports.getMe=getMe;var userDetail=/*#__PURE__*/function(){var a=(0,_asyncToGenerator2["default"])(/*#__PURE__*/_regenerator["default"].mark(function a(b,c){var d,e;return _regenerator["default"].wrap(function(a){for(;;)switch(a.prev=a.next){case 0:return d=b.params.id,a.prev=1,a.next=4,_User["default"].findById(d);case 4:return a.next=6,a.sent.populate("videos");case 6:e=a.sent,c.render("userDetail",{pageTitle:"User Detail",user:e}),a.next=13;break;case 10:a.prev=10,a.t0=a["catch"](1),c.redirect(_routes["default"].home);case 13:case"end":return a.stop();}},a,null,[[1,10]])}));return function(){return a.apply(this,arguments)}}();exports.userDetail=userDetail;var getEditProfile=function(a,b){return b.render("editProfile",{pageTitle:"Edit Profile"})};exports.getEditProfile=getEditProfile;var postEditProfile=/*#__PURE__*/function(){var a=(0,_asyncToGenerator2["default"])(/*#__PURE__*/_regenerator["default"].mark(function a(b,c){var d,e,f,g;return _regenerator["default"].wrap(function(a){for(;;)switch(a.prev=a.next){case 0:return d=b.body,e=d.name,f=d.email,g=b.file,a.prev=1,a.next=4,_User["default"].findByIdAndUpdate(b.user.id,{name:e,email:f,avatarUrl:g?g.location:b.user.avatarUrl});case 4:c.redirect(_routes["default"].me),a.next=10;break;case 7:a.prev=7,a.t0=a["catch"](1),c.redirect("/users/".concat(_routes["default"].editProfile));case 10:case"end":return a.stop();}},a,null,[[1,7]])}));return function(){return a.apply(this,arguments)}}();exports.postEditProfile=postEditProfile;var getChangePassword=function(a,b){return b.render("changePassword",{pageTitle:"Change Password"})};exports.getChangePassword=getChangePassword;var postChangePassword=/*#__PURE__*/function(){var a=(0,_asyncToGenerator2["default"])(/*#__PURE__*/_regenerator["default"].mark(function a(b,c){var d,e,f,g;return _regenerator["default"].wrap(function(a){for(;;)switch(a.prev=a.next){case 0:if(d=b.body,e=d.oldPassword,f=d.newPassword,g=d.newPassword1,a.prev=1,f===g){a.next=6;break}return c.status(400),c.redirect("/users/".concat(_routes["default"].changePassword)),a.abrupt("return");case 6:return a.next=8,b.user.changePassword(e,f);case 8:c.redirect(_routes["default"].me),a.next=15;break;case 11:a.prev=11,a.t0=a["catch"](1),c.status(400),c.redirect("/users/".concat(_routes["default"].changePassword));case 15:case"end":return a.stop();}},a,null,[[1,11]])}));return function(){return a.apply(this,arguments)}}();exports.postChangePassword=postChangePassword;
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.postChangePassword = exports.getChangePassword = exports.postEditProfile = exports.getEditProfile = exports.userDetail = exports.getMe = exports.logout = exports.postKakaoLogin = exports.kakaoLoginCallback = exports.kakaoLogin = exports.postGithubLogin = exports.githubLoginCallback = exports.githubLogin = exports.postLogin = exports.getLogin = exports.postJoin = exports.getJoin = void 0;
+
+var _passport = _interopRequireDefault(require("passport"));
+
+var _routes = _interopRequireDefault(require("../routes"));
+
+var _User = _interopRequireDefault(require("../models/User"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+var getJoin = function getJoin(req, res) {
+  res.render("join", {
+    pageTitle: "Join"
+  });
+};
+
+exports.getJoin = getJoin;
+
+var postJoin = /*#__PURE__*/function () {
+  var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(req, res, next) {
+    var _req$body, name, email, password, password2, user;
+
+    return regeneratorRuntime.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            _req$body = req.body, name = _req$body.name, email = _req$body.email, password = _req$body.password, password2 = _req$body.password2;
+
+            if (!(password !== password2)) {
+              _context.next = 6;
+              break;
+            }
+
+            res.status(400);
+            res.render("join", {
+              pageTitle: "Join"
+            });
+            _context.next = 19;
+            break;
+
+          case 6:
+            _context.prev = 6;
+            _context.next = 9;
+            return (0, _User["default"])({
+              name: name,
+              email: email
+            });
+
+          case 9:
+            user = _context.sent;
+            _context.next = 12;
+            return _User["default"].register(user, password);
+
+          case 12:
+            next();
+            _context.next = 19;
+            break;
+
+          case 15:
+            _context.prev = 15;
+            _context.t0 = _context["catch"](6);
+            console.log(_context.t0);
+            res.redirect(_routes["default"].home);
+
+          case 19:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee, null, [[6, 15]]);
+  }));
+
+  return function postJoin(_x, _x2, _x3) {
+    return _ref.apply(this, arguments);
+  };
+}();
+
+exports.postJoin = postJoin;
+
+var getLogin = function getLogin(req, res) {
+  return res.render("login", {
+    pageTitle: "Login"
+  });
+};
+
+exports.getLogin = getLogin;
+
+var postLogin = _passport["default"].authenticate("local", {
+  failureRedirect: _routes["default"].login,
+  successRedirect: _routes["default"].home
+});
+
+exports.postLogin = postLogin;
+
+var githubLogin = _passport["default"].authenticate("github");
+
+exports.githubLogin = githubLogin;
+
+var githubLoginCallback = /*#__PURE__*/function () {
+  var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(_, __, profile, cb) {
+    var _profile$_json, id, avatar_url, name, email, user, newUser;
+
+    return regeneratorRuntime.wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            _profile$_json = profile._json, id = _profile$_json.id, avatar_url = _profile$_json.avatar_url, name = _profile$_json.name, email = _profile$_json.email;
+            console.log(profile);
+            _context2.prev = 2;
+            _context2.next = 5;
+            return _User["default"].findOne({
+              email: email
+            });
+
+          case 5:
+            user = _context2.sent;
+
+            if (!user) {
+              _context2.next = 10;
+              break;
+            }
+
+            user.githubId = id;
+            user.save();
+            return _context2.abrupt("return", cb(null, user));
+
+          case 10:
+            _context2.next = 12;
+            return _User["default"].create({
+              email: email,
+              name: name,
+              githubId: id,
+              avatarUrl: avatar_url
+            });
+
+          case 12:
+            newUser = _context2.sent;
+            return _context2.abrupt("return", cb(null, newUser));
+
+          case 16:
+            _context2.prev = 16;
+            _context2.t0 = _context2["catch"](2);
+            return _context2.abrupt("return", cb(_context2.t0));
+
+          case 19:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2, null, [[2, 16]]);
+  }));
+
+  return function githubLoginCallback(_x4, _x5, _x6, _x7) {
+    return _ref2.apply(this, arguments);
+  };
+}();
+
+exports.githubLoginCallback = githubLoginCallback;
+
+var postGithubLogin = function postGithubLogin(req, res) {
+  res.redirect(_routes["default"].home);
+}; //kakao
+
+
+exports.postGithubLogin = postGithubLogin;
+
+var kakaoLogin = _passport["default"].authenticate("kakao");
+
+exports.kakaoLogin = kakaoLogin;
+
+var kakaoLoginCallback = /*#__PURE__*/function () {
+  var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(_, __, profile, done) {
+    var _profile$_json2, id, properties, kakao_account, name, avatarUrl, email, user, newUser;
+
+    return regeneratorRuntime.wrap(function _callee3$(_context3) {
+      while (1) {
+        switch (_context3.prev = _context3.next) {
+          case 0:
+            _profile$_json2 = profile._json, id = _profile$_json2.id, properties = _profile$_json2.properties, kakao_account = _profile$_json2.kakao_account;
+            name = properties.nickname;
+            avatarUrl = properties.profile_image;
+            email = kakao_account.email;
+            console.log(id, properties.nickname, properties.profile_image, kakao_account.email);
+            _context3.prev = 5;
+            _context3.next = 8;
+            return _User["default"].findOne({
+              email: email
+            });
+
+          case 8:
+            user = _context3.sent;
+
+            if (!user) {
+              _context3.next = 13;
+              break;
+            }
+
+            user.kakaoId = id;
+            user.save();
+            return _context3.abrupt("return", done(null, user));
+
+          case 13:
+            _context3.next = 15;
+            return _User["default"].create({
+              email: email,
+              name: name,
+              kakaoId: id,
+              avatarUrl: avatarUrl
+            });
+
+          case 15:
+            newUser = _context3.sent;
+            return _context3.abrupt("return", done(null, newUser));
+
+          case 19:
+            _context3.prev = 19;
+            _context3.t0 = _context3["catch"](5);
+            return _context3.abrupt("return", done(_context3.t0));
+
+          case 22:
+          case "end":
+            return _context3.stop();
+        }
+      }
+    }, _callee3, null, [[5, 19]]);
+  }));
+
+  return function kakaoLoginCallback(_x8, _x9, _x10, _x11) {
+    return _ref3.apply(this, arguments);
+  };
+}();
+
+exports.kakaoLoginCallback = kakaoLoginCallback;
+
+var postKakaoLogin = function postKakaoLogin(req, res) {
+  res.redirect(_routes["default"].home);
+};
+
+exports.postKakaoLogin = postKakaoLogin;
+
+var logout = function logout(req, res) {
+  req.logout();
+  res.redirect(_routes["default"].home);
+  console.log("bye");
+};
+
+exports.logout = logout;
+
+var getMe = function getMe(req, res) {
+  return res.render("userDetail", {
+    pageTitle: "User Detail",
+    user: req.user
+  });
+};
+
+exports.getMe = getMe;
+
+var userDetail = /*#__PURE__*/function () {
+  var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(req, res) {
+    var id, user;
+    return regeneratorRuntime.wrap(function _callee4$(_context4) {
+      while (1) {
+        switch (_context4.prev = _context4.next) {
+          case 0:
+            id = req.params.id;
+            _context4.prev = 1;
+            _context4.next = 4;
+            return _User["default"].findById(id);
+
+          case 4:
+            _context4.next = 6;
+            return _context4.sent.populate("videos");
+
+          case 6:
+            user = _context4.sent;
+            res.render("userDetail", {
+              pageTitle: "User Detail",
+              user: user
+            });
+            _context4.next = 13;
+            break;
+
+          case 10:
+            _context4.prev = 10;
+            _context4.t0 = _context4["catch"](1);
+            res.redirect(_routes["default"].home);
+
+          case 13:
+          case "end":
+            return _context4.stop();
+        }
+      }
+    }, _callee4, null, [[1, 10]]);
+  }));
+
+  return function userDetail(_x12, _x13) {
+    return _ref4.apply(this, arguments);
+  };
+}();
+
+exports.userDetail = userDetail;
+
+var getEditProfile = function getEditProfile(req, res) {
+  return res.render("editProfile", {
+    pageTitle: "Edit Profile"
+  });
+};
+
+exports.getEditProfile = getEditProfile;
+
+var postEditProfile = /*#__PURE__*/function () {
+  var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(req, res) {
+    var _req$body2, name, email, file;
+
+    return regeneratorRuntime.wrap(function _callee5$(_context5) {
+      while (1) {
+        switch (_context5.prev = _context5.next) {
+          case 0:
+            _req$body2 = req.body, name = _req$body2.name, email = _req$body2.email, file = req.file;
+            _context5.prev = 1;
+            _context5.next = 4;
+            return _User["default"].findByIdAndUpdate(req.user.id, {
+              name: name,
+              email: email,
+              avatarUrl: file ? file.location : req.user.avatarUrl
+            });
+
+          case 4:
+            res.redirect(_routes["default"].me);
+            _context5.next = 10;
+            break;
+
+          case 7:
+            _context5.prev = 7;
+            _context5.t0 = _context5["catch"](1);
+            res.redirect("/users/".concat(_routes["default"].editProfile));
+
+          case 10:
+          case "end":
+            return _context5.stop();
+        }
+      }
+    }, _callee5, null, [[1, 7]]);
+  }));
+
+  return function postEditProfile(_x14, _x15) {
+    return _ref5.apply(this, arguments);
+  };
+}();
+
+exports.postEditProfile = postEditProfile;
+
+var getChangePassword = function getChangePassword(req, res) {
+  return res.render("changePassword", {
+    pageTitle: "Change Password"
+  });
+};
+
+exports.getChangePassword = getChangePassword;
+
+var postChangePassword = /*#__PURE__*/function () {
+  var _ref6 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(req, res) {
+    var _req$body3, oldPassword, newPassword, newPassword1;
+
+    return regeneratorRuntime.wrap(function _callee6$(_context6) {
+      while (1) {
+        switch (_context6.prev = _context6.next) {
+          case 0:
+            _req$body3 = req.body, oldPassword = _req$body3.oldPassword, newPassword = _req$body3.newPassword, newPassword1 = _req$body3.newPassword1;
+            _context6.prev = 1;
+
+            if (!(newPassword !== newPassword1)) {
+              _context6.next = 6;
+              break;
+            }
+
+            res.status(400);
+            res.redirect("/users/".concat(_routes["default"].changePassword));
+            return _context6.abrupt("return");
+
+          case 6:
+            _context6.next = 8;
+            return req.user.changePassword(oldPassword, newPassword);
+
+          case 8:
+            res.redirect(_routes["default"].me);
+            _context6.next = 15;
+            break;
+
+          case 11:
+            _context6.prev = 11;
+            _context6.t0 = _context6["catch"](1);
+            res.status(400);
+            res.redirect("/users/".concat(_routes["default"].changePassword));
+
+          case 15:
+          case "end":
+            return _context6.stop();
+        }
+      }
+    }, _callee6, null, [[1, 11]]);
+  }));
+
+  return function postChangePassword(_x16, _x17) {
+    return _ref6.apply(this, arguments);
+  };
+}();
+
+exports.postChangePassword = postChangePassword;

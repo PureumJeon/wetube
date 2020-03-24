@@ -1,1 +1,36 @@
-"use strict";var _interopRequireDefault=require("@babel/runtime/helpers/interopRequireDefault");require("core-js/modules/es6.object.define-property"),Object.defineProperty(exports,"__esModule",{value:!0}),exports["default"]=void 0,require("core-js/modules/es6.number.constructor");var _mongoose=_interopRequireDefault(require("mongoose")),_passportLocalMongoose=_interopRequireDefault(require("passport-local-mongoose")),UserSchema=new _mongoose["default"].Schema({name:String,email:String,avatarUrl:String,kakaoId:Number,githubId:Number,comments:[{type:_mongoose["default"].Schema.Types.ObjectId,ref:"Comment"}],videos:[{type:_mongoose["default"].Schema.Types.ObjectId,ref:"Video"}]});UserSchema.plugin(_passportLocalMongoose["default"],{usernameField:"email"});var model=_mongoose["default"].model("User",UserSchema),_default=model;exports["default"]=_default;
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+var _mongoose = _interopRequireDefault(require("mongoose"));
+
+var _passportLocalMongoose = _interopRequireDefault(require("passport-local-mongoose"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+var UserSchema = new _mongoose["default"].Schema({
+  name: String,
+  email: String,
+  avatarUrl: String,
+  kakaoId: Number,
+  githubId: Number,
+  comments: [{
+    type: _mongoose["default"].Schema.Types.ObjectId,
+    ref: "Comment"
+  }],
+  videos: [{
+    type: _mongoose["default"].Schema.Types.ObjectId,
+    ref: "Video"
+  }]
+});
+UserSchema.plugin(_passportLocalMongoose["default"], {
+  usernameField: "email"
+});
+
+var model = _mongoose["default"].model("User", UserSchema);
+
+var _default = model;
+exports["default"] = _default;
