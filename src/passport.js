@@ -14,7 +14,7 @@ passport.use(
     {
       clientID: process.env.GH_ID,
       clientSecret: process.env.GH_SECRET,
-      callbackURL: `http://localhost:4000${routes.githubCallback}`
+      callbackURL: `https://afternoon-earth-82331.herokuapp.com${routes.githubCallback}`
     },
     githubLoginCallback
   )
@@ -25,7 +25,7 @@ passport.use(
     {
       clientID: process.env.KAKAO_ID,
       clientSecret: "", // clientSecret을 사용하지 않는다면 넘기지 말거나 빈 스트링을 넘길 것
-      callbackURL: `http://localhost:4000${routes.kakaoCallback}`
+      callbackURL: `https://afternoon-earth-82331.herokuapp.com${routes.kakaoCallback}`
     },
     kakaoLoginCallback
   )
