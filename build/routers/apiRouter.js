@@ -9,13 +9,18 @@ var _express = _interopRequireDefault(require("express"));
 
 var _routes = _interopRequireDefault(require("../routes.js"));
 
-var _videoController = require("../controllers/videoController.js");
+var _videoController = require("build/controllers/videoController.js");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : { default: obj };
+}
 
 var apiRouter = _express["default"].Router();
 
-apiRouter.post(_routes["default"].registerView, _videoController.postRegisterView);
+apiRouter.post(
+  _routes["default"].registerView,
+  _videoController.postRegisterView
+);
 apiRouter.post(_routes["default"].addComment, _videoController.postAddComment);
 var _default = apiRouter;
 exports["default"] = _default;
