@@ -5,7 +5,7 @@ import User from "./models/User";
 import {
   githubLoginCallback,
   kakaoLoginCallback
-} from "./controllers/usercontroller";
+} from "./controllers/userController";
 import routes from "./routes";
 
 passport.use(User.createStrategy());
