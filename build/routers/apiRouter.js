@@ -7,9 +7,9 @@ exports["default"] = void 0;
 
 var _express = _interopRequireDefault(require("express"));
 
-var _routes = _interopRequireDefault(require("../routes"));
+var _routes = _interopRequireDefault(require("../routes.js"));
 
-var _videoController = require("../controllers/videoController");
+var _videoController = require("../controllers/videoController.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 

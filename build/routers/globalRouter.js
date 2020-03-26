@@ -9,13 +9,13 @@ var _express = _interopRequireDefault(require("express"));
 
 var _passport = _interopRequireDefault(require("passport"));
 
-var _routes = _interopRequireDefault(require("../routes"));
+var _routes = _interopRequireDefault(require("../routes.js"));
 
-var _videocontroller = require("../controllers/videocontroller");
+var _videocontroller = require("../controllers/videocontroller.js");
 
-var _usercontroller = require("../controllers/usercontroller");
+var _usercontroller = require("../controllers/usercontroller.js");
 
-var _middlewares = require("../middlewares");
+var _middlewares = require("../middlewares.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 

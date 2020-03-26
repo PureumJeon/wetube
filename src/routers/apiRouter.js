@@ -1,9 +1,9 @@
 import express from "express";
-import routes from "../routes";
+import routes from "../routes.js";
 import {
   postRegisterView,
   postAddComment
-} from "../controllers/videoController";
+} from "../controllers/videoController.js";
 
 const apiRouter = express.Router();
 
