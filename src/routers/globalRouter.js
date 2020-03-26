@@ -1,7 +1,7 @@
 import express from "express";
 import passport from "passport";
-import routes from "../routes.js";
-import { home, search } from "../controllers/videocontroller.js";
+import routes from "../routes";
+import { home, search } from "../controllers/videoController";
 import {
   logout,
   getJoin,
@@ -13,8 +13,8 @@ import {
   getMe,
   kakaoLogin,
   postKakaoLogin
-} from "../controllers/usercontroller.js";
-import { onlyPublic, onlyPrivate } from "../middlewares.js";
+} from "../controllers/userController";
+import { onlyPublic, onlyPrivate } from "../middlewares";
 
 const globalRouter = express.Router();
 globalRouter.get(routes.join, onlyPublic, getJoin);
